@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "name": "Admin Master",
+    "email": "admin@example.com",
+    "password": "$2b$10$XJwQv...HashedPasswordAqui...",
+    "role": "admin",
+    "isVerified": true,
+    "createdAt": "2025-01-01T12:00:00.000Z",
+    "updatedAt": "2025-01-01T12:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "name": "João da Silva",
+    "email": "joao.silva@example.com",
+    "password": "$2b$10$XJwQv...HashedPasswordAqui...",
+    "role": "user",
+    "isVerified": true,
+    "createdAt": "2025-01-01T12:00:00.000Z",
+    "updatedAt": "2025-01-01T12:00:00.000Z"
+  },
+  {
+    "id": "3",
+    "name": "Maria Oliveira",
+    "email": "maria.oliveira@example.com",
+    "password": "$2b$10$XJwQv...HashedPasswordAqui...",
+    "role": "user",
+    "isVerified": false,
+    "createdAt": "2025-01-01T12:00:00.000Z",
+    "updatedAt": "2025-01-01T12:00:00.000Z"
+  }
+]
