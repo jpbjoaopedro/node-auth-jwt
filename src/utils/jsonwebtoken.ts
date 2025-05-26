@@ -22,3 +22,13 @@ export const genJwt = async (id: number, role: string) => {
 
     return token
 }
+
+export const decodeJwt = async (token: string): Promise<JwtPayload> => {
+    if (!secret_key) {
+        throw new Error('SECRET_KEY_JWT environment variable is not set');
+    }
+
+    const tokenDecoded = jwt.verify(token, secret_key) as JwtPayload;
+
+    return tokenDecoded;
+}
