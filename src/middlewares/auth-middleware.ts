@@ -2,13 +2,15 @@ import { Request, Response, NextFunction } from "express";
 import * as HttpResponse from '../utils/http-response';
 import { decodeJwt } from "../utils/jsonwebtoken";
 
-export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const token = req.cookies?.token;
+
     let response = null;
 
     if (!token) {
         response = await HttpResponse.unauthorized();
-        return res.status(response.statusCode).json(response.body)
+        res.status(response.statusCode).json(response.body);
+        return;
     }
 
     try {
@@ -17,6 +19,7 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
         next();
     } catch {
         response = await HttpResponse.unauthorized();
-        return res.status(response.statusCode).json(response.body)
+        res.status(response.statusCode).json(response.body);
+        return;
     }
 }
