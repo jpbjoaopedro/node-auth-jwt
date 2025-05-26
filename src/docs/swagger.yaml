@@ -20,6 +20,31 @@ paths:
       responses:
         "201":
           description: Usuário registrado com sucesso
+          
+  /auth/login:
+    post:
+      summary: Realiza login de usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLoginCredentials'
+      responses:
+        "200":
+          description: Login realizado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  token:
+                    type: string
+                    description: Token JWT para autenticação
+        "401":
+          description: Credenciais inválidas
   
   /users:
     get:
@@ -45,6 +70,17 @@ components:
       properties:
         name:
           type: string
+        email:
+          type: string
+        password:
+          type: string
+    
+    UserLoginCredentials:
+      type: object
+      required:
+        - email
+        - password
+      properties:
         email:
           type: string
         password:

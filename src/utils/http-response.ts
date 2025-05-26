@@ -29,3 +29,49 @@ export const badRequest = async (): Promise<HttpResponse> => {
         body: null
     }
 }
+
+export const unauthorized = async (): Promise<HttpResponse> => {
+    return {
+        statusCode: 401,
+        body: {
+            message: "Unauthorized"
+        }
+    }
+}
+
+export const forbidden = async (): Promise<HttpResponse> => {
+    return {
+        statusCode: 403,
+        body: {
+            message: "Forbidden"
+        }
+    }
+}
+
+export const notFound = async (): Promise<HttpResponse> => {
+    return {
+        statusCode: 404,
+        body: {
+            message: "Not Found"
+        }
+    }
+}
+
+export const conflict = async (): Promise<HttpResponse> => {
+    return {
+        statusCode: 409,
+        body: {
+            message: "Conflict"
+        }
+    }
+}
+
+export const internalServerError = async (error?: any): Promise<HttpResponse> => {
+    return {
+        statusCode: 500,
+        body: {
+            message: "Internal Server Error",
+            error: error?.message || error || null
+        }
+    }
+}
