@@ -5,12 +5,14 @@ info:
   version: "1.0.0"
 
 servers:
-  - url: http://localhost:3000/api
+  - url: http://localhost:3333/api
 
 paths:
   /auth/register:
     post:
-      summary: Registra um novo usuário
+      summary: Registra um novo usuário (requer autenticação de admin)
+      security:
+        - cookieAuth: []
       requestBody:
         required: true
         content:
@@ -20,6 +22,10 @@ paths:
       responses:
         "201":
           description: Usuário registrado com sucesso
+        "401":
+          description: Token de autenticação inválido ou ausente
+        "403":
+          description: Acesso negado - requer papel de administrador
           
   /auth/login:
     post:
@@ -45,10 +51,11 @@ paths:
                     description: Token JWT para autenticação
         "401":
           description: Credenciais inválidas
-  
-  /users:
+    /users:
     get:
-      summary: Retorna lista de usuários
+      summary: Retorna lista de usuários (requer autenticação de admin)
+      security:
+        - cookieAuth: []
       responses:
         "200":
           description: Lista de usuários retornada com sucesso
@@ -58,6 +65,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
+        "401":
+          description: Token de autenticação inválido ou ausente
+        "403":
+          description: Acesso negado - requer papel de administrador
 
 components:
   schemas:
@@ -71,7 +82,7 @@ components:
         name:
           type: string
         email:
-          type: string
+          type: string        
         password:
           type: string
     
@@ -98,3 +109,9 @@ components:
         createdAt:
           type: string
           format: date-time
+
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
